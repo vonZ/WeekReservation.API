@@ -20,7 +20,13 @@ module.exports = {
         id
       );
 
-      return "Deleted successfully";
+      const reservations = await dataSources.reservationAPI.getAllReservations();
+
+      return {
+        success: !!reservation,
+        message: "Reservation removed successfully",
+        reservations
+      };
     }
   }
 };

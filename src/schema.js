@@ -18,7 +18,7 @@ const typeDefs = gql`
   }
 
   type Reservation {
-    id: ID!
+    id: Int!
     userId: Int
     fromDate: String!
     toDate: String!
