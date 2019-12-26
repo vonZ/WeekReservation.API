@@ -15,6 +15,14 @@ class ReservationAPI extends DataSource {
     return found && found.length ? found : [];
   }
 
+  async findAndDeleteReservation({ id }) {
+    const res = await this.store.reservations.destroy({
+      where: { id }
+    });
+
+    return "Deleted successfully";
+  }
+
   async getReservationById({ id }) {
     const res = await this.store.reservations.findAll({
       where: { id }

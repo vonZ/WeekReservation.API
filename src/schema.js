@@ -54,6 +54,8 @@ const typeDefs = gql`
       payedInAdvanced: Boolean
       rentOveralls: Boolean
     ): [ReservationUpdateResponse]
+
+    deleteReservationById(id: ID!): ReservationUpdateResponse!
   }
 
   type ReservationUpdateResponse {

@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "jest",
+    "build": "nodemon src/index.js",
     "start": "nodemon src/index.js",
     "start:ci": "node src/index.js"
   },

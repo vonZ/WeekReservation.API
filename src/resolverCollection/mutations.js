@@ -12,6 +12,15 @@ module.exports = {
       const user = await dataSources.userAPI.findOrCreateReservation(
         reservation
       );
+
+      return user;
+    },
+    deleteReservationById: async (_, id, { dataSources }) => {
+      const reservation = await dataSources.reservationAPI.findAndDeleteReservation(
+        id
+      );
+
+      return "Deleted successfully";
     }
   }
 };
