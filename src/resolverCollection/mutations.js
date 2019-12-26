@@ -13,7 +13,13 @@ module.exports = {
         reservation
       );
 
-      return user;
+      const reservations = await dataSources.reservationAPI.getAllReservations();
+
+      return {
+        success: !!user,
+        message: "Reservation added successfully",
+        reservations
+      };
     },
     deleteReservationById: async (_, id, { dataSources }) => {
       const reservation = await dataSources.reservationAPI.findAndDeleteReservation(

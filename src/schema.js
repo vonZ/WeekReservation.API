@@ -53,7 +53,7 @@ const typeDefs = gql`
       transportType: String
       payedInAdvanced: Boolean
       rentOveralls: Boolean
-    ): [ReservationUpdateResponse]
+    ): ReservationUpdateResponse
 
     deleteReservationById(id: ID!): ReservationUpdateResponse!
   }
