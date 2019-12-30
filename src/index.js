@@ -5,6 +5,7 @@ const resolvers = require("./resolverCollection");
 
 const ReservationAPI = require("./datasources/reservations");
 const UserAPI = require("./datasources/user");
+const CustomerAPI = require("./datasources/customers");
 const store = createStore();
 const isEmail = require("isemail");
 
@@ -24,6 +25,7 @@ const server = new ApolloServer({
   resolvers,
   dataSources: () => ({
     reservationAPI: new ReservationAPI({ store }),
+    customerAPI: new CustomerAPI({ store }),
     userAPI: new UserAPI({ store })
   })
 });

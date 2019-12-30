@@ -40,13 +40,6 @@ class UserAPI extends DataSource {
     return users && users[0] ? users[0] : null;
   }
 
-  async findOrCreateReservation(reservation) {
-    const res = await this.store.reservations.findOrCreate({
-      where: { ...reservation }
-    });
-    return res && res.length ? res[0].get() : false;
-  }
-
   async getReservationIdsByUser({ userId }) {
     const res = await this.store.reservations.findAll({
       where: { userId }

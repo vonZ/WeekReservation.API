@@ -8,8 +8,24 @@ module.exports = {
       });
       if (user) return new Buffer(email).toString("base64");
     },
+    createCustomer: async (
+      _,
+      { firstName, lastName, email, phoneNumber },
+      { dataSources }
+    ) => {
+      const customer = await dataSources.customerAPI.findOrCreateCustomer({
+        firstName,
+        lastName,
+        email,
+        phoneNumber
+      });
+      return {
+        success: !!customer,
+        message: "Customer added successfully"
+      };
+    },
     makeReservation: async (_, reservation, { dataSources }) => {
-      const user = await dataSources.userAPI.findOrCreateReservation(
+      const user = await dataSources.reservationAPI.findOrCreateReservation(
         reservation
       );
 

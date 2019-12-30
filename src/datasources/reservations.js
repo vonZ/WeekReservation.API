@@ -15,6 +15,13 @@ class ReservationAPI extends DataSource {
     return found && found.length ? found : [];
   }
 
+  async findOrCreateReservation(reservation) {
+    const res = await this.store.reservations.findOrCreate({
+      where: { ...reservation }
+    });
+    return res && res.length ? res[0].get() : false;
+  }
+
   async findAndDeleteReservation({ id }) {
     const res = await this.store.reservations.destroy({
       where: { id }

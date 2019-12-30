@@ -27,6 +27,21 @@ module.exports.createStore = () => {
     token: SQL.STRING
   });
 
+  const customers = db.define("customer", {
+    id: {
+      type: SQL.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    createdAt: SQL.DATE,
+    updatedAt: SQL.DATE,
+    firstName: SQL.STRING,
+    lastName: SQL.STRING,
+    phoneNumber: SQL.INTEGER,
+    email: SQL.STRING,
+    token: SQL.STRING
+  });
+
   const reservations = db.define("reservation", {
     id: {
       type: SQL.INTEGER,
@@ -35,7 +50,7 @@ module.exports.createStore = () => {
     },
     createdAt: SQL.DATE,
     updatedAt: SQL.DATE,
-    userId: SQL.INTEGER,
+    customerId: SQL.INTEGER,
     fromDate: SQL.DATEONLY,
     toDate: SQL.DATEONLY,
     comment: SQL.STRING,
@@ -44,5 +59,5 @@ module.exports.createStore = () => {
     rentOveralls: SQL.BOOLEAN
   });
 
-  return { users, reservations };
+  return { users, customers, reservations };
 };

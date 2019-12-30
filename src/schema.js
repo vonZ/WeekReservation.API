@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     reservation(id: ID!): Reservation
     getAllUsers: [User]
+    getAllCustomers: [Customer]
     getAllReservations: [Reservation]
     getReservationIdsByUser(userId: ID!): Reservation
   }
@@ -19,7 +20,7 @@ const typeDefs = gql`
 
   type Reservation {
     id: Int!
-    userId: Int
+    customerId: Int
     fromDate: String!
     toDate: String!
     comment: String
@@ -35,6 +36,14 @@ const typeDefs = gql`
     phoneNumber: Int
   }
 
+  type Customer {
+    id: ID!
+    firstName: String!
+    lastName: String
+    email: String
+    phoneNumber: String
+  }
+
   type Mutation {
     # if false, booking trips failed -- check errors
     makeReservations(reservationIds: [ID]!): ReservationUpdateResponse!
@@ -45,8 +54,15 @@ const typeDefs = gql`
       email: [String]
     ): UserUpdateResponse!
 
+    createCustomer(
+      firstName: String
+      lastName: String
+      email: String
+      phoneNumber: String
+    ): CustomerUpdateResponse!
+
     makeReservation(
-      userId: Int
+      customerId: Int
       fromDate: String
       toDate: String
       comment: String
@@ -68,6 +84,12 @@ const typeDefs = gql`
     success: Boolean!
     message: String
     user: [User]
+  }
+
+  type CustomerUpdateResponse {
+    success: Boolean!
+    message: String
+    customer: [Customer]
   }
 `;
 
