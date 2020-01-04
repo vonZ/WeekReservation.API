@@ -3,9 +3,11 @@ const { gql } = require("apollo-server");
 const typeDefs = gql`
   type Query {
     reservation(id: ID!): Reservation
+    customer(id: ID!): Customer
     getAllUsers: [User]
     getAllCustomers: [Customer]
     getAllReservations: [Reservation]
+    getAllRoomTypes: [Roomtypes]
     getReservationIdsByUser(userId: ID!): Reservation
   }
 
@@ -25,6 +27,8 @@ const typeDefs = gql`
     toDate: String!
     comment: String
     transportType: String
+    nrOfGuests: String
+    roomType: Int
     payedInAdvanced: Boolean
     rentOveralls: Boolean
   }
@@ -42,6 +46,16 @@ const typeDefs = gql`
     lastName: String
     email: String
     phoneNumber: String
+  }
+
+  type Roomtypes {
+    id: ID!
+    name: String!
+    mainImage: String
+    roomType: String
+    description: String
+    roomTypesAvailable: Int
+    price: Int
   }
 
   type Mutation {
@@ -67,6 +81,8 @@ const typeDefs = gql`
       toDate: String
       comment: String
       transportType: String
+      nrOfGuests: Int
+      roomType: Int
       payedInAdvanced: Boolean
       rentOveralls: Boolean
     ): ReservationUpdateResponse

@@ -20,6 +20,16 @@ class CustomerAPI extends DataSource {
     return customers && customers[0] ? customers[0] : null;
   }
 
+  async getCustomerById({ id }) {
+    if (!id) return null;
+
+    const customer = await this.store.customers.findAll({
+      where: { id }
+    });
+
+    return customer && customer[0] ? customer[0] : null;
+  }
+
   async getAllCustomers() {
     const found = await this.store.customers.findAll();
     return found && found.length ? found : [];

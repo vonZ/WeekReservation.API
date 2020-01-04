@@ -55,9 +55,27 @@ module.exports.createStore = () => {
     toDate: SQL.DATEONLY,
     comment: SQL.STRING,
     transportType: SQL.STRING,
+    nrOfGuests: SQL.INTEGER,
+    roomType: SQL.INTEGER,
     payedInAdvanced: SQL.BOOLEAN,
     rentOveralls: SQL.BOOLEAN
   });
 
-  return { users, customers, reservations };
+  const roomTypes = db.define("roomType", {
+    id: {
+      type: SQL.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    createdAt: SQL.DATE,
+    updatedAt: SQL.DATE,
+    name: SQL.STRING,
+    mainImage: SQL.STRING,
+    roomType: SQL.STRING,
+    description: SQL.STRING,
+    roomTypesAvailable: SQL.BOOLEAN,
+    price: SQL.INTEGER
+  });
+
+  return { users, customers, reservations, roomTypes };
 };
