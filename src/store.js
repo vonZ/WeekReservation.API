@@ -73,7 +73,7 @@ module.exports.createStore = () => {
     mainImage: SQL.STRING,
     roomType: SQL.STRING,
     description: SQL.STRING,
-    roomTypesAvailable: SQL.BOOLEAN,
+    roomTypesAvailable: SQL.INTEGER,
     price: SQL.INTEGER
   });
 

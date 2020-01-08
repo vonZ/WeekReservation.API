@@ -27,6 +27,13 @@ class ReservationAPI extends DataSource {
     return res && res.length ? res[0].get() : false;
   }
 
+  async findOrCreateRoomType(roomTypeData) {
+    const res = await this.store.roomTypes.findOrCreate({
+      where: { ...roomTypeData }
+    });
+    return res && res.length ? res[0].get() : false;
+  }
+
   async findAndDeleteReservation({ id }) {
     const res = await this.store.reservations.destroy({
       where: { id }

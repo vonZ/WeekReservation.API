@@ -25,14 +25,14 @@ module.exports = {
       };
     },
     makeReservation: async (_, reservation, { dataSources }) => {
-      const user = await dataSources.reservationAPI.findOrCreateReservation(
+      const reservationItem = await dataSources.reservationAPI.findOrCreateReservation(
         reservation
       );
 
       const reservations = await dataSources.reservationAPI.getAllReservations();
 
       return {
-        success: !!user,
+        success: !!reservationItem,
         message: "Reservation added successfully",
         reservations
       };
@@ -48,6 +48,15 @@ module.exports = {
         success: !!reservation,
         message: "Reservation removed successfully",
         reservations
+      };
+    },
+    createRoomType: async (_, roomTypeData, { dataSources }) => {
+      const roomType = await dataSources.reservationAPI.findOrCreateRoomType(
+        roomTypeData
+      );
+      return {
+        success: !!roomType,
+        message: "Room type added successfully"
       };
     }
   }
