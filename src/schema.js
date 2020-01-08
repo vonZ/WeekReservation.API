@@ -46,6 +46,7 @@ const typeDefs = gql`
     lastName: String
     email: String
     phoneNumber: String
+    nrOfReservations: Int
   }
 
   type Roomtypes {
@@ -88,6 +89,15 @@ const typeDefs = gql`
     ): ReservationUpdateResponse
 
     deleteReservationById(id: ID!): ReservationUpdateResponse!
+
+    createRoomType(
+      name: String
+      mainImage: String
+      roomType: String
+      description: String
+      roomTypesAvailable: Int
+      price: Int
+    ): RoomCreateResponse!
   }
 
   type ReservationUpdateResponse {
@@ -106,6 +116,12 @@ const typeDefs = gql`
     success: Boolean!
     message: String
     customer: [Customer]
+  }
+
+  type RoomCreateResponse {
+    success: Boolean!
+    message: String
+    roomTypes: [Roomtypes]
   }
 `;
 
