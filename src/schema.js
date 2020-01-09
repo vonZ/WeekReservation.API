@@ -6,6 +6,7 @@ const typeDefs = gql`
     customer(id: ID!): Customer
     getAllUsers: [User]
     getAllCustomers: [Customer]
+    getReservationByCustomerId(customerId: ID!): [Reservation]
     getAllReservations: [Reservation]
     getAllRoomTypes: [Roomtypes]
     getReservationIdsByUser(userId: ID!): Reservation
@@ -31,6 +32,7 @@ const typeDefs = gql`
     roomType: Int
     payedInAdvanced: Boolean
     rentOveralls: Boolean
+    customer: [Customer]
   }
 
   type User {
@@ -47,6 +49,7 @@ const typeDefs = gql`
     email: String
     phoneNumber: String
     nrOfReservations: Int
+    reservations: [Reservation]
   }
 
   type Roomtypes {

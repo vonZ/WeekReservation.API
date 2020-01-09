@@ -77,5 +77,8 @@ module.exports.createStore = () => {
     price: SQL.INTEGER
   });
 
+  customers.hasMany(reservations);
+  reservations.belongsTo(customers);
+
   return { users, customers, reservations, roomTypes };
 };
