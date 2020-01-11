@@ -10,56 +10,7 @@ const typeDefs = gql`
     getAllReservations: [Reservation]
     getAllRoomTypes: [Roomtypes]
     getReservationIdsByUser(userId: ID!): Reservation
-  }
-
-  """
-  Simple wrapper around our list of launches that contains a cursor to the
-  last item in the list. Pass this cursor to the launches query to fetch results
-  after these.
-  """
-  type ReservationConnection { # add this below the Query type as an additional type.
-    reservations: [Reservation]!
-  }
-
-  type Reservation {
-    id: Int!
-    customerId: Int
-    fromDate: String!
-    toDate: String!
-    comment: String
-    transportType: String
-    nrOfGuests: String
-    roomType: Int
-    payedInAdvanced: Boolean
-    rentOveralls: Boolean
-    customer: [Customer]
-  }
-
-  type User {
-    id: ID!
-    email: String!
-    name: String
-    phoneNumber: Int
-  }
-
-  type Customer {
-    id: ID!
-    firstName: String!
-    lastName: String
-    email: String
-    phoneNumber: String
-    nrOfReservations: Int
-    reservations: [Reservation]
-  }
-
-  type Roomtypes {
-    id: ID!
-    name: String!
-    mainImage: String
-    roomType: String
-    description: String
-    roomTypesAvailable: Int
-    price: Int
+    getAllSlots: [Slot]
   }
 
   type Mutation {
@@ -86,7 +37,7 @@ const typeDefs = gql`
       comment: String
       transportType: String
       nrOfGuests: Int
-      roomType: Int
+      roomTypeId: Int
       payedInAdvanced: Boolean
       rentOveralls: Boolean
     ): ReservationUpdateResponse
@@ -101,6 +52,72 @@ const typeDefs = gql`
       roomTypesAvailable: Int
       price: Int
     ): RoomCreateResponse!
+
+    createSlot(
+      alias: String
+      fromDate: String
+      toDate: String
+      capacity: Int
+    ): SlotCreateResponse!
+  }
+
+  """
+  Simple wrapper around our list of launches that contains a cursor to the
+  last item in the list. Pass this cursor to the launches query to fetch results
+  after these.
+  """
+  type ReservationConnection { # add this below the Query type as an additional type.
+    reservations: [Reservation]!
+  }
+
+  type Reservation {
+    id: Int!
+    customerId: Int
+    fromDate: String!
+    toDate: String!
+    comment: String
+    transportType: String
+    nrOfGuests: String
+    roomType: Roomtypes
+    payedInAdvanced: Boolean
+    rentOveralls: Boolean
+    customer: Customer
+  }
+
+  type User {
+    id: ID!
+    email: String!
+    name: String
+    phoneNumber: Int
+  }
+
+  type Customer {
+    id: ID!
+    firstName: String!
+    lastName: String
+    email: String
+    phoneNumber: String
+    nrOfReservations: Int
+    reservations: [Reservation]
+  }
+
+  type Roomtypes {
+    id: ID!
+    name: String!
+    mainImage: String
+    type: String
+    description: String
+    roomTypesAvailable: Int
+    reservations: [Reservation]
+    price: Int
+  }
+
+  type Slot {
+    id: ID!
+    alias: String
+    fromDate: String
+    toDate: String
+    capacity: Int
   }
 
   type ReservationUpdateResponse {
@@ -125,6 +142,11 @@ const typeDefs = gql`
     success: Boolean!
     message: String
     roomTypes: [Roomtypes]
+  }
+
+  type SlotCreateResponse {
+    success: Boolean!
+    message: String
   }
 `;
 

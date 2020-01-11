@@ -56,7 +56,7 @@ module.exports.createStore = () => {
     comment: SQL.STRING,
     transportType: SQL.STRING,
     nrOfGuests: SQL.INTEGER,
-    roomType: SQL.INTEGER,
+    roomTypeId: SQL.INTEGER,
     payedInAdvanced: SQL.BOOLEAN,
     rentOveralls: SQL.BOOLEAN
   });
@@ -71,14 +71,28 @@ module.exports.createStore = () => {
     updatedAt: SQL.DATE,
     name: SQL.STRING,
     mainImage: SQL.STRING,
-    roomType: SQL.STRING,
+    type: SQL.STRING,
     description: SQL.STRING,
     roomTypesAvailable: SQL.INTEGER,
     price: SQL.INTEGER
   });
 
+  const slots = db.define("slot", {
+    id: {
+      type: SQL.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    createdAt: SQL.DATE,
+    updatedAt: SQL.DATE,
+    alias: SQL.STRING,
+    fromDate: SQL.STRING,
+    toDate: SQL.INTEGER,
+    capacity: SQL.INTEGER
+  });
+
   customers.hasMany(reservations);
   reservations.belongsTo(customers);
 
-  return { users, customers, reservations, roomTypes };
+  return { users, customers, reservations, roomTypes, slots };
 };

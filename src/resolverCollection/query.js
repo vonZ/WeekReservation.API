@@ -17,6 +17,8 @@ module.exports = {
     getAllReservations: async (_, __, { dataSources }) =>
       Promise.resolve(dataSources.reservationAPI.getAllReservations()),
     getReservationIdsByUser: async (_, { userId }, { dataSources }) =>
-      Promise.resolve(dataSources.userAPI.getReservationIdsByUser({ userId }))
+      Promise.resolve(dataSources.userAPI.getReservationIdsByUser({ userId })),
+    getAllSlots: async (_, { id }, { dataSources }) =>
+      Promise.resolve(dataSources.slotAPI.getAllSlots())
   }
 };

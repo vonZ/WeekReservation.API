@@ -11,7 +11,17 @@ class ReservationAPI extends DataSource {
   }
 
   async getAllReservations() {
-    const found = await this.store.reservations.findAll();
+    const found = await this.store.reservations
+      .findAll({
+        include: [
+          {
+            model: this.store.customers,
+            as: "customer"
+          }
+        ]
+      })
+      .then(reservation => reservation);
+
     return found && found.length ? found : [];
   }
 

@@ -58,6 +58,13 @@ module.exports = {
         success: !!roomType,
         message: "Room type added successfully"
       };
+    },
+    createSlot: async (_, slotData, { dataSources }) => {
+      const slot = await dataSources.slotAPI.findOrCreateSlot(slotData);
+      return {
+        success: !!slot,
+        message: "Slot added successfully"
+      };
     }
   }
 };
