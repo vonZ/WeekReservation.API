@@ -82,6 +82,7 @@ const typeDefs = gql`
     payedInAdvanced: Boolean
     rentOveralls: Boolean
     customer: Customer
+    slot: Slot
   }
 
   type User {
@@ -118,6 +119,7 @@ const typeDefs = gql`
     fromDate: String
     toDate: String
     capacity: Int
+    reservations: [Reservation]
   }
 
   type ReservationUpdateResponse {
@@ -147,6 +149,7 @@ const typeDefs = gql`
   type SlotCreateResponse {
     success: Boolean!
     message: String
+    slots: [Slot]
   }
 `;
 

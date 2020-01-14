@@ -11,7 +11,16 @@ class SlotAPI extends DataSource {
   }
 
   async getAllSlots() {
-    const found = await this.store.slots.findAll();
+    const found = await this.store.slots
+      .findAll({
+        include: [
+          {
+            model: this.store.reservations,
+            as: "reservations"
+          }
+        ]
+      })
+      .then(slot => slot);
 
     return found && found.length ? found : [];
   }

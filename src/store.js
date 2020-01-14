@@ -58,7 +58,8 @@ module.exports.createStore = () => {
     nrOfGuests: SQL.INTEGER,
     roomTypeId: SQL.INTEGER,
     payedInAdvanced: SQL.BOOLEAN,
-    rentOveralls: SQL.BOOLEAN
+    rentOveralls: SQL.BOOLEAN,
+    slotId: SQL.INTEGER
   });
 
   const roomTypes = db.define("roomType", {
@@ -92,7 +93,9 @@ module.exports.createStore = () => {
   });
 
   customers.hasMany(reservations);
+  slots.hasMany(reservations);
   reservations.belongsTo(customers);
+  reservations.belongsTo(slots);
 
   return { users, customers, reservations, roomTypes, slots };
 };

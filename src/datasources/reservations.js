@@ -17,7 +17,8 @@ class ReservationAPI extends DataSource {
           {
             model: this.store.customers,
             as: "customer"
-          }
+          },
+          { model: this.store.slots, as: "slot" }
         ]
       })
       .then(reservation => reservation);
