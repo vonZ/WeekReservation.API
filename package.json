@@ -4,8 +4,6 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "build": "run-p build:**",
-    "build:app": "react-scripts build",
     "start": "nodemon src/index.js",
     "start:ci": "node src/index.js"
   },
