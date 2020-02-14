@@ -114,12 +114,14 @@ const typeDefs = gql`
   }
 
   type Slot {
-    id: ID!
+    id: ID
     alias: String
     fromDate: String
     toDate: String
     capacity: Int
     reservations: [Reservation]
+    month: String
+    occupationStatusCode: Int
   }
 
   type ReservationUpdateResponse {

@@ -1,4 +1,5 @@
 const { DataSource } = require("apollo-datasource");
+const { months_sv, setOccupationStatus } = require("../utils/helper");
 
 class SlotAPI extends DataSource {
   constructor({ store }) {
@@ -20,7 +21,18 @@ class SlotAPI extends DataSource {
           }
         ]
       })
-      .then(slot => slot);
+      .then(slot =>
+        slot.map(item => {
+          const fromDate = new Date(item.fromDate);
+          const slotsLeft = item.capacity - item.reservations.length;
+
+          return {
+            ...item.dataValues,
+            month: months_sv[fromDate.getMonth()],
+            occupationStatusCode: setOccupationStatus(slotsLeft)
+          };
+        })
+      );
 
     return found && found.length ? found : [];
   }
