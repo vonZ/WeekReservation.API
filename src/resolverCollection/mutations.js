@@ -29,18 +29,12 @@ module.exports = {
     makeReservation: async (_, reservation, { dataSources }) => {
       const slots = await dataSources.slotAPI.getAllSlots();
 
-      const fromDateIsBetweenSlot =
+      const getSlotObject =
         slots.find(item =>
           isBetweenDates(item.fromDate, item.toDate, reservation.fromDate)
         ) || {};
 
-      const toDateIsBetweenSlot =
-        slots.find(item =>
-          isBetweenDates(item.fromDate, item.toDate, reservation.toDate)
-        ) || {};
-
-      const found = fromDateIsBetweenSlot ? fromDateIsBetweenSlot : {};
-      const { dataValues: { id = 0 } = {} } = found;
+      const { id = 0 } = getSlotObject;
 
       if (id === 0) {
         const reservations = await dataSources.reservationAPI.getAllReservations();
