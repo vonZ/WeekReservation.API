@@ -19,6 +19,10 @@ module.exports = {
     getReservationIdsByUser: async (_, { userId }, { dataSources }) =>
       Promise.resolve(dataSources.userAPI.getReservationIdsByUser({ userId })),
     getAllSlots: async (_, { id }, { dataSources }) =>
-      Promise.resolve(dataSources.slotAPI.getAllSlots())
+      Promise.resolve(dataSources.slotAPI.getAllSlots()),
+    getSlotByDateSpan: async (_, { fromDate, toDate }, { dataSources }) =>
+      Promise.resolve(
+        dataSources.slotAPI.getSlotByDateSpan({ fromDate, toDate })
+      )
   }
 };

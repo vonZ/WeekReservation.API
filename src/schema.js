@@ -11,6 +11,7 @@ const typeDefs = gql`
     getAllRoomTypes: [Roomtypes]
     getReservationIdsByUser(userId: ID!): Reservation
     getAllSlots: [Slot]
+    getSlotByDateSpan(fromDate: String!, toDate: String!): [Slot]
   }
 
   type Mutation {

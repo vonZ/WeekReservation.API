@@ -1,5 +1,9 @@
 const { DataSource } = require("apollo-datasource");
-const { months_sv, setOccupationStatus } = require("../utils/helper");
+const {
+  months_sv,
+  setOccupationStatus,
+  isBetweenDates
+} = require("../utils/helper");
 
 class SlotAPI extends DataSource {
   constructor({ store }) {
@@ -42,6 +46,21 @@ class SlotAPI extends DataSource {
       where: { ...slot }
     });
     return res && res.length ? res[0].get() : false;
+  }
+
+  async getSlotByDateSpan({ fromDate, toDate }) {
+    if (!fromDate || !toDate) return null;
+
+    const slots = await this.store.slots.findAll();
+
+    const slotList =
+      slots.filter(
+        item =>
+          isBetweenDates(fromDate, toDate, item.fromDate) &&
+          isBetweenDates(fromDate, toDate, item.toDate)
+      ) || {};
+
+    return slotList && slotList.length ? slotList : [];
   }
 }
 

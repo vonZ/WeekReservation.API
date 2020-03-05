@@ -1,14 +1,10 @@
 module.exports = {
   isBetweenDates: (dateFrom, dateTo, dateCheck) => {
-    console.log({ dateFrom });
-    console.log({ dateTo });
-    console.log({ dateCheck });
-
     const fDate = Date.parse(dateFrom.split("T")[0]);
-    const lDate = Date.parse(dateTo.split("T")[0]);
+    const tDate = Date.parse(dateTo.split("T")[0]);
     const cDate = Date.parse(dateCheck.split("T")[0]);
 
-    return cDate <= lDate && cDate >= fDate;
+    return cDate <= tDate && cDate >= fDate;
   },
 
   setOccupationStatus: slotsLeft => {
