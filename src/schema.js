@@ -59,6 +59,7 @@ const typeDefs = gql`
       fromDate: String
       toDate: String
       capacity: Int
+      price: Int
     ): SlotCreateResponse!
   }
 
@@ -123,6 +124,7 @@ const typeDefs = gql`
     reservations: [Reservation]
     month: String
     occupationStatusCode: Int
+    price: Int
   }
 
   type ReservationUpdateResponse {

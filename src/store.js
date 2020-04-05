@@ -90,7 +90,8 @@ module.exports.createStore = () => {
     alias: SQL.STRING,
     fromDate: SQL.STRING,
     toDate: SQL.INTEGER,
-    capacity: SQL.INTEGER
+    capacity: SQL.INTEGER,
+    price: SQL.INTEGER
   });
 
   customers.hasMany(reservations);
